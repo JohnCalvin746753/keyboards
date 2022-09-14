@@ -1,0 +1,10 @@
+*~
+\#*\#
+.DS_Store
+.repl-*
+.nrepl-*
+images/*.pxm
+.lein-*
+*.gcode
+*.scad
+/target
