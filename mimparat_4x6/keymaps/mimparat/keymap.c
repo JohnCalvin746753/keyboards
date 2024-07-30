@@ -5,6 +5,10 @@
 #define _NUMBERS 2
 #define _MOUSE   3
 
+#ifdef CONSOLE_ENABLE
+#include "print.h"
+#endif
+
 /* enum custom_keycodes {
     SHKEY = SAFE_RANGE,
     LSKEY,
@@ -16,11 +20,31 @@
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    #ifdef CONSOLE_ENABLE
+    uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
+    #endif 
+
     switch (keycode) {
+      case KEY1:
+          if (record->event.pressed) {
+              // when keycode QMKBEST is pressed
+              SEND_STRING();
+          } else {
+              // when keycode QMKBEST is released
+      }
+      break;
+      case KEY2:
+          if (record->event.pressed) {
+              // when keycode QMKBEST is pressed
+              SEND_STRING();
+          } else {
+              // when keycode QMKBEST is released
+      }
+      break;
       case SHKEY:
           if (record->event.pressed) {
               // when keycode QMKBEST is pressed
-              SEND_STRING("");
+              SEND_STRING();
           } else {
               // when keycode QMKBEST is released
       }
@@ -122,13 +146,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TAB, KC_UNDS, KC_COMM, KC_DOT, KC_LSFT, ____,      ____, KC_INS, LESS, KC_MINS, OYAMLLESS, KC_BSPC,
       KC_ESC, KC_1, KC_2, KC_3, KC_4, SHKEY,                 KGALL, KC_7, KC_8, KC_9, KC_0, KC_ENT,
       ____, KC_COLN, KC_LEFT, KC_DOWN, KC_5, ____,         ____, KC_6,  KC_UP, KC_RGHT, KC_LSFT, ____,
-                                   ____, ____, ____,            KC_LALT, KC_DOT, KC_LNUM,
+                                   ____, ____, ____,            KC_LALT, KC_DOT, KC_NUM,
                                    ____, ____
     ),
 	[_MOUSE] = LAYOUT(
-      ____, DRG_TOG, SNP_TOG, KC_BTN3, ____, ____,      ____, ____, ____, ____, ____, ____,
+      KEY1, DRG_TOG, SNP_TOG, KC_BTN3, ____, ____,      ____, ____, ____, ____, ____, ____,
       ____, DRGSCRL, SNIPING, KC_BTN2, KC_BTN1, ____,                 KC_UNDO, KC_COPY, KC_PASTE, KC_WWW_BACK, KC_WWW_FORWARD, KC_WWW_REFRESH,
-      ____, DPI_RMOD, DPI_MOD, S_D_RMOD, S_D_MOD, ____,         ____, ____,  ____, ____, ____, ____,
+      KEY2, DPI_RMOD, DPI_MOD, S_D_RMOD, S_D_MOD, ____,         ____, ____,  ____, ____, ____, ____,
                                    ____, ____, ____,            ____, ____, ____,
                                    ____, ____
     )

@@ -34,6 +34,8 @@ enum charybdis_keycodes {
     DRAGSCROLL_MODE,
     DRAGSCROLL_MODE_TOGGLE,
     KEYMAP_SAFE_RANGE,
+    KEY1,
+    KEY2,
     SHKEY,
     LSKEY,
     UPDIR,
